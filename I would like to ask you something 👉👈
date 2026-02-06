@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: #fff0f5;
+      overflow: hidden;
+    }
+
+    .hearts {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      color: rgba(255, 105, 180, 0.4);
+      font-size: 20px;
+      animation: floatUp 8s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(-10vh); opacity: 0; }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #5a2a2a;
+      margin-bottom: 20px;
+    }
+
+    img {
+      max-width: 240px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      position: relative;
+      height: 80px;
+    }
+
+    button {
+      padding: 12px 26px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    #yes {
+      background: #ff5c8d;
+      color: white;
+    }
+
+    #no {
+      background: #ddd;
+      color: #555;
+      position: absolute;
+      left: 55%;
+    }
+
+    .letter {
+      max-width: 700px;
+      background: #fff;
+      padding: 28px;
+      border-radius: 16px;
+      text-align: left;
+      line-height: 1.8;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="hearts" id="hearts"></div>
+
+  <div class="container" id="container">
+    <div>
+      <h1>Will you be my Valentine? 🥺💖</h1>
+      <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" alt="begging">
+      <div class="buttons">
+        <button id="yes">Yes 💕</button>
+        <button id="no">No 😐</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // floating hearts
+    const hearts = document.getElementById("hearts");
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = 16 + Math.random() * 24 + "px";
+      heart.style.animationDuration = 6 + Math.random() * 6 + "s";
+      hearts.appendChild(heart);
+      setTimeout(() => heart.remove(), 12000);
+    }, 400);
+
+    // evil no button
+    const noBtn = document.getElementById("no");
+    noBtn.addEventListener("mouseover", () => {
+      noBtn.style.transform =
+        `translate(${Math.random()*200 - 100}px, ${Math.random()*120 - 60}px)`;
+    });
+
+    // yes click
+    document.getElementById("yes").onclick = () => {
+      document.getElementById("container").innerHTML = `
+        <div class="letter">
+          <p>I love you for a million reasons, and even then, words still feel small compared to what I feel for you. I love you for who you are, and for who I become when I’m with you. You make life feel softer, warmer, and somehow more meaningful just by existing in it.</p>
+
+          <p>I love the way you care—deeply, genuinely, without pretending. The way you notice little things, the way your emotions are real and raw, the way your heart is always involved in everything you do. I love how strong you are, even on days when you don’t see it yourself. And I love how human you are—your flaws, your overthinking, your vulnerability—because they make you you.</p>
+
+          <p>I love how you make me feel understood, even when I struggle to explain myself. With you, I don’t have to act or prove anything. I can just be me, and that comfort is something I’ve never felt this deeply before. You feel like home in a world that’s constantly rushing.</p>
+
+          <p>I love your smile because it instantly changes my mood. I love your voice because it calms me. I love your presence because it grounds me. Even in silence, being with you feels enough.</p>
+
+          <p>You push me to be better without forcing me. You believe in me even when I doubt myself. You stand by me, not just in the good moments, but in the messy, confusing ones too—and that means everything.</p>
+
+          <p><strong>Most of all, I love you because loving you feels natural.</strong> It’s not forced or dramatic—it’s steady, deep, and real. You’re not just someone I love; you’re someone I choose, every single day. And I’ll keep choosing you, always. ❤️</p>
+        </div>
+      `;
+    };
+  </script>
+
+</body>
+</html>
